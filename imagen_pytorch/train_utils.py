@@ -74,6 +74,7 @@ class TrainLoop:
 
         self.model_params = list(self.model.parameters())
         self.master_params = self.model_params
+        self.named_master_params = list(self.model.named_parameters())
         self.lg_loss_scale = INITIAL_LOG_LOSS_SCALE
         self.sync_cuda = th.cuda.is_available()
 
@@ -252,8 +253,9 @@ class TrainLoop:
 
     def _log_grad_norm(self):
         sqsum = 0.0
-        for p in self.master_params:
-            sqsum += (p.grad ** 2).sum().item()
+        for name, p in self.named_master_params:
+            if 't5' not in name:
+                sqsum += (p.grad ** 2).sum().item()
         logger.logkv_mean("grad_norm", np.sqrt(sqsum))
 
     def _anneal_lr(self):
