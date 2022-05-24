@@ -1,10 +1,9 @@
 from .gaussian_diffusion import get_named_beta_schedule
 from . import gaussian_diffusion as gd
 from .respace import SpacedDiffusion, space_timesteps
-from dalle2_decoder.text2im_model import (
+from imagen_pytorch.text2im_model import (
     Text2ImUNet,
 )
-from dalle2_decoder.tokenizer.bpe import get_encoder
 
 
 def model_and_diffusion_defaults():

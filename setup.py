@@ -1,19 +1,19 @@
 from setuptools import setup
 
 setup(
-    name="dalle2_decoder",
+    name="imagen_pytorch",
     packages=[
-        "dalle2_decoder",
-        "dalle2_decoder.clip",
-        "dalle2_decoder.tokenizer",
+        "imagen_pytorch",
+        "imagen_pytorch.clip",
+        "imagen_pytorch.tokenizer",
     ],
     package_data={
-        "dalle2_decoder.tokenizer": [
+        "imagen_pytorch.tokenizer": [
             "bpe_simple_vocab_16e6.txt.gz",
             "encoder.json.gz",
             "vocab.bpe.gz",
         ],
-        "dalle2_decoder.clip": ["config.yaml"],
+        "imagen_pytorch.clip": ["config.yaml"],
     },
     install_requires=[
         "Pillow",
