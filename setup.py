@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="imagen-pytorch",
+    name="Imagen-pytorch",
     packages=[
         "imagen_pytorch",
         "imagen_pytorch.clip",
