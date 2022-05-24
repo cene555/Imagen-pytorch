@@ -48,13 +48,13 @@ class Text2ImUNet(UNetModel):
     def get_text_emb(self, tokens, mask):
         #with th.no_grad():
         xf_out = self.t5(input_ids=tokens, attention_mask=mask)['last_hidden_state'].detach()
-        eos_index = (tokens == 1).float().argmax(dim=1)
-        x, y = th.meshgrid(eos_index, th.arange(xf_out.shape[-1]))
-        xf_proj = self.t5_proj(xf_out.gather(1, x.unsqueeze(1))[:, -1, :])
+        xf_proj = self.t5_proj(xf_out[:, -1])
         xf_out2 = self.to_xf_width(xf_out)
         xf_out2 = xf_out2.permute(0, 2, 1)  # NLC -> NCL
 
         outputs = dict(xf_proj=xf_proj, xf_out=xf_out2)
+
+        return outputs
 
         return outputs
 
