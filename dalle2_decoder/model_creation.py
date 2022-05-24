@@ -1,7 +1,7 @@
 from .gaussian_diffusion import get_named_beta_schedule
 from . import gaussian_diffusion as gd
 from .respace import SpacedDiffusion, space_timesteps
-from dalle2_decoder.text2im_model import (,
+from dalle2_decoder.text2im_model import (
     Text2ImUNet,
 )
 from dalle2_decoder.tokenizer.bpe import get_encoder
@@ -18,6 +18,7 @@ def model_and_diffusion_defaults():
         num_heads_upsample=-1,
         attention_resolutions="32,16,8",
         dropout=0.1,
+        t5_name='t5-large',
         text_ctx=128,
         xf_width=512,
         xf_layers=16,
