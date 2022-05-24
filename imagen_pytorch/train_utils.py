@@ -94,7 +94,7 @@ class TrainLoop:
             self.ema_params = [
                 copy.deepcopy(self.master_params) for _ in range(len(self.ema_rate))
             ]
-
+        '''
         if th.cuda.is_available():
             self.use_ddp = True
             self.ddp_model = DDP(
@@ -103,6 +103,7 @@ class TrainLoop:
                 output_device=dist_util.dev(),
                 broadcast_buffers=False,
                 bucket_cap_mb=128,
+                
                 find_unused_parameters=False,
             )
         else:
@@ -113,7 +114,9 @@ class TrainLoop:
                 )
             self.use_ddp = False
             self.ddp_model = self.model
-
+        '''
+        self.use_ddp = False
+        self.ddp_model = self.model
     def _load_and_sync_parameters(self):
         resume_checkpoint = find_resume_checkpoint() or self.resume_checkpoint
 
