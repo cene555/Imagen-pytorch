@@ -27,6 +27,7 @@ setup(
         "numpy",
         "blobfile",
         "mpi4py",
+	"transformers"
     ],
     author="",
 )
