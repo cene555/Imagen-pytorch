@@ -43,10 +43,11 @@ class Text2ImUNet(UNetModel):
 
         super().convert_to_fp16()
         self.transformer_proj.to(th.float16)
-
+        self.t5.to(th.float16)
+        self.to_xf_width.to(th.float16)
     def get_text_emb(self, tokens, mask):
         with th.no_grad():
-            xf_out = self.transformer(input_ids=tokens, attention_mask=mask)
+            xf_out = self.t5(input_ids=tokens, attention_mask=mask)
         xf_proj = self.transformer_proj(xf_out[:, 0])
         xf_out2 = self.to_xf_width(xf_out)
         xf_out2 = xf_out2.permute(0, 2, 1)  # NLC -> NCL
