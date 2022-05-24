@@ -35,20 +35,20 @@ class Text2ImUNet(UNetModel):
         else:
             super().__init__(*args, **kwargs, encoder_channels=xf_width)
         self.t5 = T5EncoderModel.from_pretrained(t5_name)
-        self.transformer_proj = nn.Linear(self.t5.shared.embedding_dim, self.model_channels * 4)
+        self.t5_proj = nn.Linear(self.t5.shared.embedding_dim, self.model_channels * 4)
         self.to_xf_width = nn.Linear(self.t5.shared.embedding_dim, xf_width)
         self.cache_text_emb = cache_text_emb
         self.cache = None
     def convert_to_fp16(self):
 
         super().convert_to_fp16()
-        self.transformer_proj.to(th.float16)
+        self.t5_proj.to(th.float16)
         self.t5.to(th.float16)
         self.to_xf_width.to(th.float16)
     def get_text_emb(self, tokens, mask):
         with th.no_grad():
             xf_out = self.t5(input_ids=tokens, attention_mask=mask)['last_hidden_state']
-        xf_proj = self.transformer_proj(xf_out[:, 0])
+        xf_proj = self.t5_proj(xf_out[:, 0])
         xf_out2 = self.to_xf_width(xf_out)
         xf_out2 = xf_out2.permute(0, 2, 1)  # NLC -> NCL
 
@@ -65,7 +65,6 @@ class Text2ImUNet(UNetModel):
         if self.xf_width:
             text_outputs = self.get_text_emb(tokens, mask)
             xf_proj, xf_out = text_outputs["xf_proj"], text_outputs["xf_out"]
-            print(xf_proj.shape, xf_out.shape)
             emb = emb + xf_proj.to(emb)
         else:
             xf_out = None
@@ -80,4 +79,27 @@ class Text2ImUNet(UNetModel):
         h = h.type(x.dtype)
         h = self.out(h)
         return h
+class SuperResText2ImUNet(Text2ImUNet):
+    """
+    A text2im model that performs super-resolution.
+    Expects an extra kwarg `low_res` to condition on a low-resolution image.
+    """
+
+    def __init__(self, *args, **kwargs):
+        if "in_channels" in kwargs:
+            kwargs = dict(kwargs)
+            kwargs["in_channels"] = kwargs["in_channels"] * 2
+        else:
+            # Curse you, Python. Or really, just curse positional arguments :|.
+            args = list(args)
+            args[1] = args[1] * 2
+        super().__init__(*args, **kwargs)
+
+    def forward(self, x, timesteps, low_res=None, **kwargs):
+        _, _, new_height, new_width = x.shape
+        upsampled = F.interpolate(
+            low_res, (new_height, new_width), mode="bilinear", align_corners=False
+        )
+        x = th.cat([x, upsampled], dim=1)
+        return super().forward(x, timesteps, **kwargs)
 
