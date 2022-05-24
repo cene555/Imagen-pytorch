@@ -4,7 +4,7 @@ Implementation of [Imagen](https://gweb-research-imagen.appspot.com/), Google's 
 
 For detailed usage examples, see the [notebooks](notebooks) directory.
 
- * The [inference](notebooks/Imagen_pytorch_inference.ipynb) [![][colab]][colab-inference] notebook shows how to use Imagen.
+ * The [inference](notebooks/Imagen_pytorch_inference updated by Maxim Gerasimov.ipynb) [![][colab]][colab-inference2] notebook shows how to use Imagen.
 
  * The [training](notebooks/Imagen_pytorch_train.ipynb) [![][colab]][colab-training] notebook shows how to train Imagen.
 
