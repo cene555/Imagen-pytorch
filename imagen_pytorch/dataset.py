@@ -33,7 +33,8 @@ class ImageDataset(Dataset):
 
     def __getitem__(self, idx):
         out_dict = {}
-        path, text = self.df.iloc[idx]['path'], self.df.iloc['text']
+        path, text = self.df.iloc[idx]['path'], self.df.iloc[idx]['text']
+        
         with bf.BlobFile(os.path.join(self.image_dir, path), "rb") as f:
             pil_image = Image.open(f)
             pil_image.load()
