@@ -26,8 +26,9 @@ setup(
         "regex",
         "numpy",
         "blobfile",
-        "mpi4py",
-	"transformers"
+        "accelerate",
+	"transformers",
     ],
-    author="",
+    author="cene655",
+)
 )

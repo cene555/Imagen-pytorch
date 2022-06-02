@@ -1,6 +1,5 @@
 from PIL import Image
 import blobfile as bf
-from mpi4py import MPI
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
 import torch
@@ -15,8 +14,7 @@ def get_loader(batch_size, resolution, image_dir, df, zero_text_prob=0.1, tokeni
     loader = DataLoader(
         dataset, batch_size=batch_size, shuffle=shuffle, num_workers=1, drop_last=True
     )
-    while True:
-        yield from loader
+    return loader
    
 class ImageDataset(Dataset):
     def __init__(self, resolution, image_dir, df, tokenizer_name, max_len, zero_text_prob):

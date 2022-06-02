@@ -7,7 +7,7 @@ Docstrings have been added, as well as DDIM sampling and a new collection of bet
 
 import enum
 import math
-
+from copy import deepcopy
 import numpy as np
 import torch as th
 
@@ -248,6 +248,7 @@ class GaussianDiffusion:
         assert t.shape == (B,)
         model_output = model(x, self._scale_timesteps(t), **model_kwargs)
 
+
         if self.model_var_type in [ModelVarType.LEARNED, ModelVarType.LEARNED_RANGE]:
             assert model_output.shape == (B, C * 2, *x.shape[2:])
             model_output, model_var_values = th.split(model_output, C, dim=1)
@@ -283,7 +284,14 @@ class GaussianDiffusion:
             if denoised_fn is not None:
                 x = denoised_fn(x)
             if clip_denoised:
-                return x.clamp(-1, 1)
+                x2 = th.clone(x).cpu().detach().numpy()
+                p = 80
+                s = np.percentile(
+                    np.abs(x2), p,
+                    axis=tuple(range(1, x2.ndim)))[0]
+                s = max(s, 1.0)
+                x = th.clip(x, -s, s) / s
+                return x#x.clamp(-1, 1)
             return x
 
         if self.model_mean_type == ModelMeanType.PREVIOUS_X:
