@@ -31,4 +31,3 @@ setup(
     ],
     author="cene655",
 )
-)
