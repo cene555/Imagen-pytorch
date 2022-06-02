@@ -88,7 +88,9 @@ class TrainLoop:
         self.model = self.model.to(self.accelerator.device)
         self.opt = AdamW(self.master_params, lr=self.lr, weight_decay=self.weight_decay)
         self.scheduler = get_cosine_schedule_with_warmup(self.opt, num_warmup_steps=num_warmup_steps, num_training_steps=num_training_steps)
-        self.model, self.opt, self.data, self.scheduler = self.accelerator.prepare(self.model, self.opt, self.data.get_loader(), self.scheduler)
+        try:
+            self.data = self.data.get_loader()
+        self.model, self.opt, self.data, self.scheduler = self.accelerator.prepare(self.model, self.opt, self.data, self.scheduler)
         if self.resume_step:
             self._load_optimizer_state()
             # Model was resumed, either due to a restart or a checkpoint
