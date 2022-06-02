@@ -10,5 +10,3 @@ For detailed usage examples, see the [notebooks](notebooks) directory.
 
 [colab]: <https://colab.research.google.com/assets/colab-badge.svg>
 [colab-inference]: <https://colab.research.google.com/drive/1DvU6SSNRUMBlE_EzgtRrv4d1TWpvcy9z?usp=sharing>
-[colab-inference2]: <https://colab.research.google.com/github/cene555/Imagen-pytorch/blob/main/notebooks/Imagen_pytorch_inference%20updated%20by%20Maxim%20Gerasimov.ipynb>
-[colab-training]: <https://colab.research.google.com/drive/1CNrZZH5VUnJAIxLXl2HOJDNh2JCCQLSz?usp=sharing>
