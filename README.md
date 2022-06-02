@@ -11,25 +11,25 @@ For detailed usage examples, see the [notebooks](notebooks) directory.
 
 # A red cube on top of blue cube
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/1.jpg)
+![image1](https://github.com/cene555/Imagen-pytorch/tree/main/images/1.jpg)
 
 # Teddy bears swimming at the Olympics 400m Butterfly event.
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/2.jpg)
+![image2](https://github.com/cene555/Imagen-pytorch/tree/main/images/2.jpg)
 
 # A teddy bear in times square
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/3.jpg)
+![image3](https://github.com/cene555/Imagen-pytorch/tree/main/images/3.jpg)
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/6.jpg)
+![image4](https://github.com/cene555/Imagen-pytorch/tree/main/images/6.jpg)
 
 # A face
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/4.jpg)
+![image5](https://github.com/cene555/Imagen-pytorch/tree/main/images/4.jpg)
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/5.jpg)
+![image6](https://github.com/cene555/Imagen-pytorch/tree/main/images/5.jpg)
 
 # A photo of teddy bear
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/8.jpg)
+![image7](https://github.com/cene555/Imagen-pytorch/tree/main/images/8.jpg)
 
-![image](https://github.com/cene555/Imagen-pytorch/tree/main/images/7.jpg)
+![image8](https://github.com/cene555/Imagen-pytorch/tree/main/images/7.jpg)
