@@ -7,4 +7,4 @@ For detailed usage examples, see the [notebooks](notebooks) directory.
  * The [inference](notebooks/Imagen_pytorch_inference.ipynb) [![][colab]][colab-inference] notebook shows how to use Imagen.
  
 [colab]: <https://colab.research.google.com/assets/colab-badge.svg>
-[colab-inference]: <https://colab.research.google.com/drive/1DvU6SSNRUMBlE_EzgtRrv4d1TWpvcy9z?usp=sharing>
+[colab-inference]: <https://colab.research.google.com/drive/1P2hksAqTWxC69n8zMGJ9ZTN1dOJ2KVTO?usp=sharing>
