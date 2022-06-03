@@ -90,6 +90,8 @@ class TrainLoop:
         self.scheduler = get_cosine_schedule_with_warmup(self.opt, num_warmup_steps=num_warmup_steps, num_training_steps=num_training_steps)
         try:
             self.data = self.data.get_loader()
+        except:
+            pass
         self.model, self.opt, self.data, self.scheduler = self.accelerator.prepare(self.model, self.opt, self.data, self.scheduler)
         if self.resume_step:
             self._load_optimizer_state()
